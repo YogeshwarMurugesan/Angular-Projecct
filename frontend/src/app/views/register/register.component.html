@@ -1,0 +1,121 @@
+<div class="container-fluid">
+  <h1 class="text-center">Application Name </h1>
+
+  <div class="signUpBox">
+    <div class="title text-center">
+      <h5 class="font-weight-bold">Create a new account</h5>
+      <p class="text-muted">It's quick and easy.</p>
+    </div>
+    <hr />
+
+    <form class="form p-3" #registerForm="ngForm" (ngSubmit)="onSubmit(registerForm)">
+      <div class="inputs">
+        <div class="row no-gutters">
+          <div class="col col-lg-6 col-sm-12 mb-3">
+            <input type="text" name="firstName" #firstNameInput="ngModel" [(ngModel)]="formData.firstName" class="form-control"
+              placeholder="First name" id="first-name" minlength="2" maxlength="50" required
+              [ngClass]="{ redBorder: firstNameInput.touched && firstNameInput.errors }" />
+            <span *ngIf="firstNameInput.invalid && firstNameInput.touched" class="text-danger">
+              <span *ngIf="firstNameInput.errors?.['required']">First name is required.</span>
+              <span *ngIf="firstNameInput.errors?.['minlength']">First name must be at least 2 characters long.</span>
+              <span *ngIf="firstNameInput.errors?.['maxlength']">First name cannot exceed 50 characters.</span>
+            </span>
+          </div>
+
+          <div class="col-lg-6 col-sm-12">
+            <input type="text" name="surName" #surNameInput="ngModel" [(ngModel)]="formData.surName" class="form-control"
+              placeholder="Surname" id="sur-name" minlength="2" maxlength="50" required
+              [ngClass]="{ redBorder: surNameInput.touched  && surNameInput.errors }" />
+            <span *ngIf="surNameInput.invalid && surNameInput.touched" class="text-danger">
+              <span *ngIf="surNameInput.errors?.['required']">Surname is required.</span>
+              <span *ngIf="surNameInput.errors?.['minlength']">Surname must be at least 2 characters long.</span>
+              <span *ngIf="surNameInput.errors?.['maxlength']">Surname cannot exceed 50 characters.</span>
+            </span>
+          </div>
+        </div>
+
+        <div class="input-fields mt-2">
+          <label for="dob" class="form-label fs-10">Date of Birth</label>
+          <div class="d-flex gap-2">
+            <select id="dob-month" class="form-select" name="selectedMonth" [(ngModel)]="formData.selectedMonth" required>
+              <option value="" disabled selected>Month</option>
+              <option *ngFor="let month of months" [value]="month.value">
+                {{ month.name }}
+              </option>
+            </select>
+
+            <select id="dob-date" class="form-select" name="selectedDate" [(ngModel)]="formData.selectedDate" required>
+              <option value="" disabled selected>Date</option>
+              <option *ngFor="let date of dates" [value]="date">
+                {{ date }}
+              </option>
+            </select>
+
+            <select id="dob-year" class="form-select" name="selectedYear" [(ngModel)]="formData.selectedYear" required>
+              <option value="" disabled selected>Year</option>
+              <option *ngFor="let year of years" [value]="year">
+                {{ year }}
+              </option>
+            </select>
+          </div>
+        </div>
+
+        <div class="row genderBox1 mt-2">
+          <label for="gender" class="form-label">Gender</label>
+          <div class="col genderBox">
+            <div class="form-check">
+              <label for="male" class="form-check-label me-5">Male</label>
+              <input type="radio" id="male" [(ngModel)]="formData.gender" name="gender" value="male" required />
+            </div>
+          </div>
+          <div class="col genderBox ms-2">
+            <div class="form-check">
+              <label for="female" class="form-check-label me-4">Female</label>
+              <input type="radio" id="female" [(ngModel)]="formData.gender" name="gender" value="female" required />
+            </div>
+          </div>
+          <div class="col genderBox ms-2">
+            <div class="form-check">
+              <label for="others" class="form-check-label me-4">Others</label>
+              <input type="radio" id="others" [(ngModel)]="formData.gender" name="gender" value="others" required />
+            </div>
+          </div>
+        </div>
+
+        <div class="input-fields mt-3">
+          <input type="text" class="form-control" name="emailOrNumber" #emailOrNumberInput="ngModel"
+            [(ngModel)]="formData.emailOrNumber" placeholder="Mobile Number/Email" id="email" required
+            pattern="^([a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,})|(\d{10})$"
+            [ngClass]="{ redBorder: emailOrNumberInput.touched  &&  emailOrNumberInput.errors }" />
+          <span *ngIf="emailOrNumberInput.invalid && emailOrNumberInput.touched" class="text-danger">
+            <span *ngIf="emailOrNumberInput.errors?.['required']">This field is required.</span>
+            <span *ngIf="emailOrNumberInput.errors?.['pattern']">
+              Enter a valid email address or 10-digit mobile number.
+            </span>
+          </span>
+        </div>
+
+        <div class="input-fields mt-3">
+          <input type="password" class="form-control" name="password" #passwordInput="ngModel" [(ngModel)]="formData.password"
+            placeholder="Password" id="password" required minlength="8"
+            [ngClass]="{ redBorder: passwordInput.touched  &&  passwordInput.errors }" />
+          <span *ngIf="passwordInput.invalid && passwordInput.touched" class="text-danger">
+            <span *ngIf="passwordInput.errors?.['required']">Password is required.</span>
+            <span *ngIf="passwordInput.errors?.['minlength']">Password must be at least 8 characters long.</span>
+          </span>
+        </div>
+      </div>
+
+      <p class="mt-2">
+        By clicking Sign Up, you agree to our Terms, Privacy Policy, and Cookies
+        Policy. You may receive SMS notifications from us and can opt out at any
+        time.
+      </p>
+
+      <button type="submit" class="btn btn-success w-100" [disabled]="!registerForm.valid">
+        Sign Up
+      </button>
+    </form>
+    <h6 class="mt-3 text-center"><a routerLink = '/login'>Already have an account?</a></h6>
+  </div>
+</div>

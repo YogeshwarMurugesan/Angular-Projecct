@@ -1,0 +1,18 @@
+<div class="container-fluid">
+    <div class="row">
+      <div class="col col-lg-7 col-md-6 col-sm-12 leftBox text-center">
+        <h1>Laufee</h1>
+        <h3>Laufee helps you connect and <br>share with the people in your life.</h3>
+      </div>
+      <div class="col col-lg-5 col-md-6 col-sm-12 rightBox">
+        <form action="" #Form="ngForm" (submit)="onSubmit(Form)" class="form p-5 border">
+          <input type="text" [(ngModel)] = loginFormData.emailOrNumber name="emailOrNumber"  placeholder="Email address or phone number" class="form-control">
+          <input type="password" [(ngModel)] = loginFormData.password name="password"  placeholder="Password" class="form-control mt-3">
+          <button class="btn btn-primary w-100 mt-3">Log in</button>
+
+        <hr>
+        <button type="button" class="btn btn-success w-100" (click) = "accountCreation()">Create a new Account</button>
+      </form>
+      </div>
+    </div>
+    </div>
